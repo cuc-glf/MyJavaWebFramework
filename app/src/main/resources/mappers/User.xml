@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "entity.User">
+
+    <insert id = "insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO User
+        (name, phone, email, birth, gender)
+        VALUES
+        (#{name}, #{phone}, #{email}, #{birth}, #{gender});
+    </insert>
+
+    <select id="selectAll" resultType="tech.gaolinfeng.entity.User">
+        SELECT * FROM User;
+    </select>
+
+    <select id="selectOne" resultType="tech.gaolinfeng.entity.User">
+        SELECT * FROM User WHERE id = #{id};
+    </select>
+
+</mapper>

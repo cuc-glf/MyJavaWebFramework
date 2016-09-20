@@ -13,13 +13,19 @@ public class User {
     private Date birth;
     private int gender; // 1: male, 2: female
 
-    public User(int id, String name, String phone, String email, Date birth, int gender) {
-        this.id = id;
+    public static final int MALE = 1;
+    public static final int FEMALE = 2;
+
+    public User(String name, String phone, String email, Date birth, int gender) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birth = birth;
         this.gender = gender;
+    }
+
+    public User() {
+
     }
 
     public int getId() {
@@ -70,5 +76,15 @@ public class User {
         this.gender = gender;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", birth=" + birth +
+                ", gender=" + gender +
+                '}';
+    }
 }
