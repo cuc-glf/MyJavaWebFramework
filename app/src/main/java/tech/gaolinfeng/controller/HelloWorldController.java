@@ -21,7 +21,6 @@ public class HelloWorldController {
     @RequestMapping(method = RequestMethod.GET)
     public User helloWorld() {
         return userService.getUserById(1);
-//        return new User("gaolf", "18611900120", "gaolinfeng@zuoyebang.com", new Date(1993, 2, 19), User.MALE);
     }
 
 }
