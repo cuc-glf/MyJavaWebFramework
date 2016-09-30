@@ -30,18 +30,40 @@
       <column id="8" parent="2" name="gender">
         <data-type>tinyint(4)</data-type>
       </column>
-      <index id="9" parent="2" name="name">
+      <column id="9" parent="2" name="passwd">
+        <mandatory>1</mandatory>
+        <data-type>varchar(128)</data-type>
+      </column>
+      <index id="10" parent="2" name="name">
         <columns>name</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="10" parent="2" name="name">
+      <index id="11" parent="2" name="User_email_uindex">
+        <columns>email</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="12" parent="2" name="User_phone_uindex">
+        <columns>phone</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="13" parent="2" name="name">
         <columns>name</columns>
         <underlying-index>name</underlying-index>
       </key>
-      <key id="11" parent="2" name="PRIMARY">
+      <key id="14" parent="2" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
+      </key>
+      <key id="15" parent="2" name="User_email_uindex">
+        <columns>email</columns>
+        <underlying-index>User_email_uindex</underlying-index>
+      </key>
+      <key id="16" parent="2" name="User_phone_uindex">
+        <columns>phone</columns>
+        <underlying-index>User_phone_uindex</underlying-index>
       </key>
     </database-model>
   </data-source>

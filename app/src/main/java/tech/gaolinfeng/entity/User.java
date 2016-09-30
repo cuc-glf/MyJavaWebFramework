@@ -1,5 +1,7 @@
 package tech.gaolinfeng.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -10,18 +12,21 @@ public class User {
     private String name;
     private String phone;
     private String email;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date birth;
     private int gender; // 1: male, 2: female
+    private String passwd;
 
     public static final int MALE = 1;
     public static final int FEMALE = 2;
 
-    public User(String name, String phone, String email, Date birth, int gender) {
+    public User(String name, String phone, String email, Date birth, int gender, String passwd) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birth = birth;
         this.gender = gender;
+        this.passwd = passwd;
     }
 
     public User() {
@@ -76,6 +81,14 @@ public class User {
         this.gender = gender;
     }
 
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -85,6 +98,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
                 ", gender=" + gender +
+                ", passwd='" + passwd + '\'' +
                 '}';
     }
 }

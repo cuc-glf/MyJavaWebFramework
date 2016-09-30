@@ -9,9 +9,7 @@ import tech.gaolinfeng.entity.User;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by gaolf on 16/9/20.
@@ -37,13 +35,13 @@ public class MyBatisTest {
     @Test
     public void testInsert() throws IOException {
         //Create a new User object
-        Random random = new Random();
-        String name = "gaolf#" + random.nextInt();
-        User user = new User(name, "18611900120", "gaolinfeng@zuoyebang.com", new Date(1993, 2, 19), User.MALE);
-        //Insert User data
-        session.insert("entity.User.insert", user);
-        System.out.println("testInsert succeed");
-        session.commit();
+//        Random random = new Random();
+//        String name = "gaolf#" + random.nextInt();
+//        User user = new User(name, "18611900120", "gaolinfeng@zuoyebang.com", new Date(1993, 2, 19), User.MALE, "");
+//        //Insert User data
+//        session.insert("entity.User.insert", user);
+//        System.out.println("testInsert succeed");
+//        session.commit();
     }
 
     @Test

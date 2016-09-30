@@ -6,9 +6,9 @@
 
     <insert id = "insert" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO User
-        (name, phone, email, birth, gender)
+        (name, phone, email, birth, gender, passwd)
         VALUES
-        (#{name}, #{phone}, #{email}, #{birth}, #{gender});
+        (#{name}, #{phone}, #{email}, #{birth}, #{gender}, #{passwd});
     </insert>
 
     <select id="selectAll" resultType="tech.gaolinfeng.entity.User">
@@ -18,5 +18,28 @@
     <select id="selectOne" resultType="tech.gaolinfeng.entity.User">
         SELECT * FROM User WHERE id = #{id};
     </select>
+
+    <select id="selectOneByName" resultType="tech.gaolinfeng.entity.User">
+        SELECT * FROM User WHERE name = #{name};
+    </select>
+
+    <update id="updateUserInfoByIdOrName">
+        UPDATE User
+        <set>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+        </set>
+        where
+            <choose>
+                <when test="id != null">id = #{id};</when>
+                <when test="name != null">name = #{name};</when>
+                <otherwise>FALSE</otherwise>
+            </choose>
+
+    </update>
 
 </mapper>
