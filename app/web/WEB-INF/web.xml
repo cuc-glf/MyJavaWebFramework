@@ -10,16 +10,11 @@
         <location>/notFound</location>
     </error-page>
 
-    <!-- enable spring security -->
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!-- not authorized, spring security may return this -->
+    <error-page>
+        <error-code>401</error-code>
+        <location>/notLogin</location>
+    </error-page>
 
     <!-- enable spring application context -->
     <listener>
@@ -37,5 +32,10 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <!-- control login session timeout -->
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
 
 </web-app>

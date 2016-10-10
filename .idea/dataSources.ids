@@ -8,62 +8,61 @@
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
       <schema id="1" name="test"/>
-      <table id="2" parent="1" name="User"/>
-      <column id="3" parent="2" name="id">
+      <table id="2" parent="1" name="user_roles"/>
+      <table id="3" parent="1" name="users"/>
+      <column id="4" parent="2" name="user_role_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="4" parent="2" name="name">
+      <column id="5" parent="2" name="username">
         <mandatory>1</mandatory>
-        <data-type>varchar(100)</data-type>
+        <data-type>varchar(45)</data-type>
       </column>
-      <column id="5" parent="2" name="phone">
+      <column id="6" parent="2" name="role">
         <mandatory>1</mandatory>
-        <data-type>varchar(20)</data-type>
+        <data-type>varchar(45)</data-type>
       </column>
-      <column id="6" parent="2" name="email">
-        <data-type>varchar(100)</data-type>
-      </column>
-      <column id="7" parent="2" name="birth">
-        <data-type>date</data-type>
-      </column>
-      <column id="8" parent="2" name="gender">
-        <data-type>tinyint(4)</data-type>
-      </column>
-      <column id="9" parent="2" name="passwd">
-        <mandatory>1</mandatory>
-        <data-type>varchar(128)</data-type>
-      </column>
-      <index id="10" parent="2" name="name">
-        <columns>name</columns>
+      <index id="7" parent="2" name="fk_username_idx">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="8" parent="2" name="uni_username_role">
+        <columns>role
+username</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <index id="11" parent="2" name="User_email_uindex">
-        <columns>email</columns>
-        <desc-columns></desc-columns>
-        <unique>1</unique>
-      </index>
-      <index id="12" parent="2" name="User_phone_uindex">
-        <columns>phone</columns>
-        <desc-columns></desc-columns>
-        <unique>1</unique>
-      </index>
-      <key id="13" parent="2" name="name">
-        <columns>name</columns>
-        <underlying-index>name</underlying-index>
-      </key>
-      <key id="14" parent="2" name="PRIMARY">
-        <columns>id</columns>
+      <key id="9" parent="2" name="PRIMARY">
+        <columns>user_role_id</columns>
         <primary>1</primary>
       </key>
-      <key id="15" parent="2" name="User_email_uindex">
-        <columns>email</columns>
-        <underlying-index>User_email_uindex</underlying-index>
+      <key id="10" parent="2" name="uni_username_role">
+        <columns>role
+username</columns>
+        <underlying-index>uni_username_role</underlying-index>
       </key>
-      <key id="16" parent="2" name="User_phone_uindex">
-        <columns>phone</columns>
-        <underlying-index>User_phone_uindex</underlying-index>
+      <foreign-key id="11" parent="2" name="fk_username">
+        <columns>username</columns>
+        <ref-key>~.users.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="12" parent="3" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="13" parent="3" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="14" parent="3" name="enabled">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <key id="15" parent="3" name="PRIMARY">
+        <columns>username</columns>
+        <primary>1</primary>
       </key>
     </database-model>
   </data-source>

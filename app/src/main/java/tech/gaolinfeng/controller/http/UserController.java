@@ -1,16 +1,15 @@
 package tech.gaolinfeng.controller.http;
 
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import tech.gaolinfeng.controller.CommonResponse;
 import tech.gaolinfeng.entity.User;
 import tech.gaolinfeng.service.TokenService;
 import tech.gaolinfeng.service.UserService;
-import tech.gaolinfeng.util.SessionIdentifierGenerator;
-import tech.gaolinfeng.util.TextUtils;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * Created by gaolf on 16/9/28.
@@ -49,90 +48,84 @@ public class UserController {
         return new QueryResult(CommonResponse.CODE_OK, "", user);
     }
 
-    @RequestMapping(value = "/user/update", method = {RequestMethod.PUT, RequestMethod.POST})
-    public CommonResponse handleUpdate(@RequestParam String token,
-                                       @RequestParam(required = false) Date birth,
-                                       @RequestParam(defaultValue = "0") int gender) {
-        if (birth == null && gender != User.MALE && gender != User.FEMALE) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "没有可更新的信息");
-        }
+//    @RequestMapping(value = "/user/update", method = {RequestMethod.PUT, RequestMethod.POST})
+//    public CommonResponse handleUpdate(@RequestParam(required = false) Date birth,
+//                                       @RequestParam(defaultValue = "0") int gender) {
+//        if (birth == null && gender != User.MALE && gender != User.FEMALE) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "没有可更新的信息");
+//        }
+//
+//        boolean success;
+//        success = userService.updateUserInfoByIdOrName(id, null, birth, gender);
+//        if (success) {
+//            return new CommonResponse(CommonResponse.CODE_OK, "用户信息更新成功");
+//        } else {
+//            return new CommonResponse(CommonResponse.SERVER_INTERNAL_ERROR, "用户信息更新失败");
+//        }
+//    }
+//
+//    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+//    public CommonResponse handleRegister(@RequestParam String userName,
+//                                         @RequestParam String email,
+//                                         @RequestParam String phone,
+//                                         @RequestParam String passwd,
+//                                         @RequestParam(required = false) Date birth,
+//                                         @RequestParam(defaultValue = "0") int gender) {
+//
+//        if (!TextUtils.validateEmail(email)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "电子邮箱格式错误");
+//        }
+//        if (!TextUtils.validatePhoneNumber(phone)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "手机号码错误");
+//        }
+//        if (!TextUtils.validateUserName(userName)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "用户名非法");
+//        }
+//        if (!TextUtils.validateUserPasswd(passwd)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "密码签名错误");
+//        }
+//
+//        User user = new User(userName, phone, email, birth, gender, passwd);
+//
+//        boolean success = false;
+//        try {
+//            success = userService.createUser(user);
+//        } catch (DuplicateKeyException e) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "无法创建用户, 邮箱, 用户名或手机号已被占用");
+//        }
+//        if (success) {
+//            return new CommonResponse(CommonResponse.CODE_OK, "注册新用户成功");
+//        } else {
+//            return new CommonResponse(CommonResponse.SERVER_INTERNAL_ERROR, "注册失败, 请稍后重试");
+//        }
+//    }
 
-        int id = tokenService.getIdByToken(token);
-        if (id <= 0) {
-            return new CommonResponse(CommonResponse.TOKEN_ERROR, "用户未登录");
-        }
-
-        boolean success;
-        success = userService.updateUserInfoByIdOrName(id, null, birth, gender);
-        if (success) {
-            return new CommonResponse(CommonResponse.CODE_OK, "用户信息更新成功");
-        } else {
-            return new CommonResponse(CommonResponse.SERVER_INTERNAL_ERROR, "用户信息更新失败");
-        }
-    }
-
-    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-    public CommonResponse handleRegister(@RequestParam String userName,
-                                         @RequestParam String email,
-                                         @RequestParam String phone,
-                                         @RequestParam String passwd,
-                                         @RequestParam(required = false) Date birth,
-                                         @RequestParam(defaultValue = "0") int gender) {
-
-        if (!TextUtils.validateEmail(email)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "电子邮箱格式错误");
-        }
-        if (!TextUtils.validatePhoneNumber(phone)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "手机号码错误");
-        }
-        if (!TextUtils.validateUserName(userName)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "用户名非法");
-        }
-        if (!TextUtils.validateUserPasswd(passwd)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "密码签名错误");
-        }
-
-        User user = new User(userName, phone, email, birth, gender, passwd);
-
-        boolean success = false;
-        try {
-            success = userService.createUser(user);
-        } catch (DuplicateKeyException e) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "无法创建用户, 邮箱, 用户名或手机号已被占用");
-        }
-        if (success) {
-            return new CommonResponse(CommonResponse.CODE_OK, "注册新用户成功");
-        } else {
-            return new CommonResponse(CommonResponse.SERVER_INTERNAL_ERROR, "注册失败, 请稍后重试");
-        }
-    }
-
-    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public CommonResponse handleLogin(@RequestParam String name, @RequestParam String passwd) {
-        if (!TextUtils.validateUserName(name)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "用户名不存在");
-        }
-        if (!TextUtils.validateUserPasswd(passwd)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "密码错误");
-        }
-
-        User user = userService.getUserByName(name);
-        if (user == null) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "用户不存在");
-        }
-        if (!TextUtils.equals(user.getPasswd(), passwd)) {
-            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "密码错误");
-        }
-
-        String token = SessionIdentifierGenerator.randomString(32);
-        tokenService.updateToken(user.getId(), token);
-        return new LoginResult(CommonResponse.CODE_OK, "", token);
-    }
-
-    @RequestMapping(value = "/user/logout", method = RequestMethod.POST)
-    public CommonResponse handleLogout(@RequestParam String token) {
-        tokenService.clearToken(token);
-        return new CommonResponse(CommonResponse.CODE_OK, "");
-    }
+//    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+//    public CommonResponse handleLogin(@RequestParam String name, @RequestParam String passwd) {
+//        if (!TextUtils.validateUserName(name)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "用户名不存在");
+//        }
+//        if (!TextUtils.validateUserPasswd(passwd)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "密码错误");
+//        }
+//
+//        User user = userService.getUserByName(name);
+//        if (user == null) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "用户不存在");
+//        }
+//        if (!TextUtils.equals(user.getPasswd(), passwd)) {
+//            return new CommonResponse(CommonResponse.PARAM_NOT_ALLOWED, "密码错误");
+//        }
+//
+//        String token = SessionIdentifierGenerator.randomString(32);
+//        tokenService.updateToken(user.getId(), token);
+//        return new LoginResult(CommonResponse.CODE_OK, "", token);
+//    }
+//
+//    @RequestMapping(value = "/user/logout", method = RequestMethod.POST)
+//    public CommonResponse handleLogout(@RequestParam String token) {
+//        tokenService.clearToken(token);
+//        return new CommonResponse(CommonResponse.CODE_OK, "");
+//    }
 
 }
