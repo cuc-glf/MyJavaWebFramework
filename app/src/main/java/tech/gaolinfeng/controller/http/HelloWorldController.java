@@ -1,8 +1,11 @@
 package tech.gaolinfeng.controller.http;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import tech.gaolinfeng.entity.User;
-import tech.gaolinfeng.service.UserService;
+import tech.gaolinfeng.service.IUserService;
 
 import javax.annotation.Resource;
 
@@ -13,7 +16,7 @@ import javax.annotation.Resource;
 public class HelloWorldController {
 
     @Resource
-    private UserService userService;
+    private IUserService userService;
 
     @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
     public User helloWorld(@RequestParam int id) {

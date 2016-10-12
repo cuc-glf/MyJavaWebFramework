@@ -4,11 +4,13 @@
 
 <mapper namespace = "entity.User">
 
+    <!-- user table operations -->
+
     <insert id = "insert" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO User
-        (name, phone, email, birth, gender, passwd)
+        (name, phone, email, passwd, salt)
         VALUES
-        (#{name}, #{phone}, #{email}, #{birth}, #{gender}, #{passwd});
+        (#{name}, #{phone}, #{email}, #{passwd}, #{salt});
     </insert>
 
     <select id="selectAll" resultType="tech.gaolinfeng.entity.User">
@@ -23,23 +25,12 @@
         SELECT * FROM User WHERE name = #{name};
     </select>
 
-    <update id="updateUserInfoByIdOrName">
-        UPDATE User
-        <set>
-            <if test="birth != null">
-                birth = #{birth},
-            </if>
-            <if test="gender != null">
-                gender = #{gender}
-            </if>
-        </set>
-        where
-            <choose>
-                <when test="id != null">id = #{id};</when>
-                <when test="name != null">name = #{name};</when>
-                <otherwise>FALSE</otherwise>
-            </choose>
+    <select id="selectOneByEmail" resultType="tech.gaolinfeng.entity.User">
+        SELECT * FROM User WHERE email = #{email};
+    </select>
 
-    </update>
+    <select id="selectOneByPhone" resultType="tech.gaolinfeng.entity.User">
+        SELECT * FROM User WHERE phone = #{phone};
+    </select>
 
 </mapper>

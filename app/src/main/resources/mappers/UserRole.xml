@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "entity.UserRole">
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INFO UserRole
+        (role, userId)
+        VALUES
+        (#{role}, #{userId});
+    </insert>
+
+    <select id="selectByUserId" resultType="java.lang.String">
+        SELECT role FROM UserRole WHERE userId = #{userId};
+    </select>
+
+    <select id="selectByUserName" resultType="java.lang.String">
+        SELECT UserRole.role FROM
+        UserRole RIGHT JOIN User ON UserRole.user_id = User.id
+        WHERE User.name = #{username};
+    </select>
+
+    <delete id="deleteByRoleAndUserId">
+        DELETE FROM UserRole
+        WHERE role = #{role} AND userId = #{userId};
+    </delete>
+
+</mapper>

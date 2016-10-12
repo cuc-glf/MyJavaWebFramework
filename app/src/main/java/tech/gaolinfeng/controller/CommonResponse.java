@@ -33,6 +33,10 @@ public class CommonResponse {
     public int code;
     public String info;
 
+    public CommonResponse(String info) {
+        this(CODE_OK, info);
+    }
+
     public CommonResponse(int code, String info) {
         this.code = code;
         this.info = info;

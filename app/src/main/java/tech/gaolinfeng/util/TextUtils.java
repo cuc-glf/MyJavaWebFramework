@@ -46,10 +46,10 @@ public class TextUtils {
     }
 
     public static boolean validateUserName(String name) {
-        return !isEmpty(name) && name.length() < 10;
+        return !isEmpty(name) && name.length() < 20;
     }
 
     public static boolean validateUserPasswd(String passwd) {
-        return !isEmpty(passwd) && passwd.length() == 32;
+        return !isEmpty(passwd) && passwd.length() >= 6;
     }
 }

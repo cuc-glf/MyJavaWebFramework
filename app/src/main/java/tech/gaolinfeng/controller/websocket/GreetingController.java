@@ -5,7 +5,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.config.WebSocketMessageBrokerStats;
 import tech.gaolinfeng.entity.User;
-import tech.gaolinfeng.service.UserService;
+import tech.gaolinfeng.service.IUserService;
 
 import javax.annotation.Resource;
 
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public class GreetingController {
 
     @Resource
-    private UserService userService;
+    private IUserService userService;
 
     @Resource
     private WebSocketMessageBrokerStats stats;

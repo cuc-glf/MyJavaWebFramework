@@ -16,6 +16,7 @@
     </mvc:annotation-driven>
     <context:component-scan base-package="tech.gaolinfeng"/>
 
+
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:mappers/**/*.xml" />
@@ -38,5 +39,37 @@
     </bean>
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+    <!-- shiro config -->
+    <bean id="myRealm" class="tech.gaolinfeng.config.shiro.MybatisRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="unauthorizedUrl" value="/unauthorized"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /login=anon
+                /unauthorized=anon
+                /static/**=anon
+                /logout=authc
+                /authenticated=authc
+                /role=authc,roles[admin]
+                /permission=authc,perms["user:create"]
+                /**=anon
+            </value>
+        </property>
+    </bean>
+    <!-- enable shiro annotation -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <bean id="secureNumberGenerator" class="org.apache.shiro.crypto.SecureRandomNumberGenerator"/>
 
 </beans>

@@ -1,31 +1,25 @@
 package tech.gaolinfeng.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by gaolf on 16/9/19.
  */
 public class User {
+    @JsonIgnore
     private int id;
     private String name;
     private String phone;
     private String email;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date birth;
-    private int gender; // 1: male, 2: female
+    @JsonIgnore
     private String passwd;
+    @JsonIgnore
+    private String salt;
 
-    public static final int MALE = 1;
-    public static final int FEMALE = 2;
-
-    public User(String name, String phone, String email, Date birth, int gender, String passwd) {
+    public User(String name, String phone, String email, String passwd) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.birth = birth;
-        this.gender = gender;
         this.passwd = passwd;
     }
 
@@ -65,28 +59,20 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
     public String getPasswd() {
         return passwd;
     }
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     @Override
@@ -96,9 +82,8 @@ public class User {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", birth=" + birth +
-                ", gender=" + gender +
                 ", passwd='" + passwd + '\'' +
+                ", salt='" + salt + '\'' +
                 '}';
     }
 }
