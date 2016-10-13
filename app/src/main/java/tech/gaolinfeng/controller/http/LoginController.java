@@ -22,7 +22,6 @@ import tech.gaolinfeng.entity.User;
 public class LoginController {
 
     // 登录处理
-
     @RequestMapping(value = "/unauthorized", method = RequestMethod.GET)
     public CommonResponse unauthorizedGet() {
         return new CommonResponse(CommonResponse.TOKEN_ERROR, "无访问权限");
@@ -65,6 +64,7 @@ public class LoginController {
             this.user = user;
         }
     }
+
     @RequestMapping(value = "whoami", method = RequestMethod.GET)
     public CommonResponse whoAmI() {
         Subject subject = SecurityUtils.getSubject();
