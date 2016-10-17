@@ -40,7 +40,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
                 attributes.put("subject", subject);
 
-                return false;
+                return true;
             }
 
             @Override

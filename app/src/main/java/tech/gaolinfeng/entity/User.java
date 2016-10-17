@@ -82,8 +82,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", passwd='" + passwd + '\'' +
-                ", salt='" + salt + '\'' +
                 '}';
     }
 }

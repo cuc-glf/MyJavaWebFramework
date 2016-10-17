@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.gaolinfeng.controller.CommonResponse;
 import tech.gaolinfeng.entity.User;
+import tech.gaolinfeng.service.IUserService;
+
+import javax.annotation.Resource;
 
 /**
  * Created by gaolf on 16/10/10.
@@ -20,6 +23,9 @@ import tech.gaolinfeng.entity.User;
  */
 @RestController
 public class LoginController {
+
+    @Resource
+    private IUserService userService;
 
     // 登录处理
     @RequestMapping(value = "/unauthorized", method = RequestMethod.GET)
@@ -75,5 +81,26 @@ public class LoginController {
             return new WhoAmIResponse("anonymous", null);
         }
     }
+
+    private static final class CheckUserResponse extends CommonResponse {
+        public boolean usernameAllowed;
+
+        public CheckUserResponse(String info, boolean usernameAllowed) {
+            super(info);
+            this.usernameAllowed = usernameAllowed;
+        }
+    }
+
+    @RequestMapping(value = "checkUsername", method = RequestMethod.POST)
+    public CommonResponse checkUsername(@RequestParam String username) {
+        User user = userService.getUserByName(username);
+        if (user != null) {
+            return new CheckUserResponse("用户名已存在", false);
+        } else {
+            return new CheckUserResponse("", true);
+        }
+    }
+
+
 
 }
