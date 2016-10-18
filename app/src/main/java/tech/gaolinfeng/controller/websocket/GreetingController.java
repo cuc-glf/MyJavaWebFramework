@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.config.WebSocketMessageBrokerStats;
 import tech.gaolinfeng.controller.CommonResponse;
 import tech.gaolinfeng.entity.User;
-import tech.gaolinfeng.service.IUserService;
+import tech.gaolinfeng.service.basic.IUserService;
 
 import javax.annotation.Resource;
 

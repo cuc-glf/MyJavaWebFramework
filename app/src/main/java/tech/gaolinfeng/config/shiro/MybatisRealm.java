@@ -10,8 +10,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import tech.gaolinfeng.entity.User;
-import tech.gaolinfeng.service.IUserRoleService;
-import tech.gaolinfeng.service.IUserService;
+import tech.gaolinfeng.service.basic.IUserRoleService;
+import tech.gaolinfeng.service.basic.IUserService;
 
 import javax.annotation.Resource;
 import java.util.Collections;

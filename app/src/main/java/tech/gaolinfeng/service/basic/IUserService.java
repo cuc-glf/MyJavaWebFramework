@@ -1,4 +1,4 @@
-package tech.gaolinfeng.service;
+package tech.gaolinfeng.service.basic;
 
 import tech.gaolinfeng.entity.User;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.gaolinfeng.controller.CommonResponse;
 import tech.gaolinfeng.entity.User;
-import tech.gaolinfeng.service.IUserService;
+import tech.gaolinfeng.service.basic.IUserService;
 
 import javax.annotation.Resource;
 

@@ -1,0 +1,9 @@
+#Service包说明
+
+Service是在DAO之上的, 用于处理业务逻辑的服务层, Controller在完成参数验证后, 会调用Service来完成业务功能.
+
+由于使用了MyBatis, 因此传统DAO的操作都由MyBatis来进行了, basic包中的Service的每一个方法都直接对应于MyBatis中的一个方法,
+是对MyBatis的直接封装, 这些Service的操作都非常简单, 根据传入的参数通过MyBatis操作数据, 这些Service中不应该包含业务逻辑,
+而且不应该依赖其他的Service.
+
+advanced包中的Service是包含业务逻辑的Service, 这些Service不直接操作MyBatis, 而是依赖于其他的Service来进行数据操作.

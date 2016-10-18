@@ -41,6 +41,10 @@
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
+    <bean id="servletServerContainerFactoryBean" class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <property name="maxSessionIdleTimeout" value="30000"/>
+    </bean>
+
     <!-- shiro config -->
     <bean id="myRealm" class="tech.gaolinfeng.config.shiro.MybatisRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>

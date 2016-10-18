@@ -1,4 +1,4 @@
-package tech.gaolinfeng.service;
+package tech.gaolinfeng.service.basic;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;

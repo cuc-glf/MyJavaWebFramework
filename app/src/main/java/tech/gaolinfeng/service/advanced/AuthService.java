@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.gaolinfeng.config.shiro.ISimplePasswordService;
 import tech.gaolinfeng.entity.User;
-import tech.gaolinfeng.service.IUserService;
+import tech.gaolinfeng.service.basic.IUserService;
 
 import javax.annotation.Resource;
 

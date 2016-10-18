@@ -1,13 +1,13 @@
 var MyConsole = function(console) {
 	var obj = function() {
-	}
+	};
 	obj.print = function(content) {
 		console.append("<li>" + content + "</li>");
-	}
+	};
 
 	obj.clear = function() {
 		console.empty();
-	}
+	};
 	return obj;
 }
 
@@ -95,7 +95,7 @@ $(document).ready(function() {
 		client.send(destination, {}, message);
 	});
 
-	$("#ws-address").val("ws://" + window.location.host + "/portfolio");
+	$("#ws-address").val("ws://" + window.location.host + "/ws");
 	$("#ws-stomp-topic").val("/topic/greeting");
 	$("#ws-send-content").val("1");
 	$("#ws-stomp-destination").val("/app/greeting");
