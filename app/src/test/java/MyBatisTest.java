@@ -5,7 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tech.gaolinfeng.entity.User;
+import tech.gaolinfeng.base.entity.User;
 
 import java.io.IOException;
 import java.io.Reader;

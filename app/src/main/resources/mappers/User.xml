@@ -13,23 +13,23 @@
         (#{name}, #{phone}, #{email}, #{passwd}, #{salt});
     </insert>
 
-    <select id="selectAll" resultType="tech.gaolinfeng.entity.User">
+    <select id="selectAll" resultType="tech.gaolinfeng.base.entity.User">
         SELECT * FROM User;
     </select>
 
-    <select id="selectOne" resultType="tech.gaolinfeng.entity.User">
+    <select id="selectOne" resultType="tech.gaolinfeng.base.entity.User">
         SELECT * FROM User WHERE id = #{id};
     </select>
 
-    <select id="selectOneByName" resultType="tech.gaolinfeng.entity.User">
+    <select id="selectOneByName" resultType="tech.gaolinfeng.base.entity.User">
         SELECT * FROM User WHERE name = #{name};
     </select>
 
-    <select id="selectOneByEmail" resultType="tech.gaolinfeng.entity.User">
+    <select id="selectOneByEmail" resultType="tech.gaolinfeng.base.entity.User">
         SELECT * FROM User WHERE email = #{email};
     </select>
 
-    <select id="selectOneByPhone" resultType="tech.gaolinfeng.entity.User">
+    <select id="selectOneByPhone" resultType="tech.gaolinfeng.base.entity.User">
         SELECT * FROM User WHERE phone = #{phone};
     </select>
 
