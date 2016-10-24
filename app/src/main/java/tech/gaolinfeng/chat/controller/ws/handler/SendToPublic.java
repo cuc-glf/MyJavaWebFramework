@@ -1,23 +1,20 @@
-package tech.gaolinfeng.chat.controller.handler;
+package tech.gaolinfeng.chat.controller.ws.handler;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.shiro.subject.Subject;
 import tech.gaolinfeng.base.entity.User;
 import tech.gaolinfeng.base.util.TextUtils;
 import tech.gaolinfeng.chat.annotation.MessageHandler;
-import tech.gaolinfeng.chat.controller.ClientMessageType;
-import tech.gaolinfeng.chat.controller.TypedMessageHandler;
-import tech.gaolinfeng.chat.controller.TypedMessageResponse;
+import tech.gaolinfeng.chat.controller.ws.ClientMessageType;
+import tech.gaolinfeng.chat.controller.ws.TypedMessageHandler;
+import tech.gaolinfeng.chat.controller.ws.TypedMessageResponse;
 import tech.gaolinfeng.chat.entity.PublicChatMessage;
 import tech.gaolinfeng.chat.service.IPublicChatMessageService;
-import tech.gaolinfeng.chat.util.WebSocketUtil;
 import tech.gaolinfeng.chat.ws.ISessionManager;
 import tech.gaolinfeng.chat.ws.MatchAllSessionFilter;
 
 import javax.annotation.Resource;
-import javax.websocket.EncodeException;
 import javax.websocket.Session;
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -48,8 +45,7 @@ public class SendToPublic extends TypedMessageHandler {
     }
 
     @Override
-    public TypedMessageResponse handleMessage(Session session, JsonNode root) throws IOException, EncodeException {
-        Subject subject = WebSocketUtil.getSubjectAndTouch(session);
+    public TypedMessageResponse handleMessage(Session session, JsonNode root, Subject subject) {
         User user = (User) subject.getPrincipal();
         String message = root.get("content").asText();
         if (TextUtils.isEmpty(message)) {

@@ -3,7 +3,7 @@ package tech.gaolinfeng.base.jsoncodec;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.context.ContextLoader;
-import tech.gaolinfeng.chat.controller.TypedMessageResponse;
+import tech.gaolinfeng.chat.controller.ws.TypedMessageResponse;
 
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;

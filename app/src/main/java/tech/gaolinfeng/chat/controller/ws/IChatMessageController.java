@@ -1,4 +1,4 @@
-package tech.gaolinfeng.chat.controller;
+package tech.gaolinfeng.chat.controller.ws;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -10,5 +10,5 @@ import java.io.IOException;
  * Created by gaolf on 16/10/22.
  */
 public interface IChatMessageController {
-    TypedMessageResponse handleMessage(Session session, JsonNode root) throws IOException, EncodeException;
+    void handleMessage(Session session, JsonNode root) throws IOException, EncodeException;
 }

@@ -5,8 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.gaolinfeng.base.jsoncodec.JsonDecoder;
 import tech.gaolinfeng.base.jsoncodec.JsonEncoder;
-import tech.gaolinfeng.chat.controller.IChatMessageController;
-import tech.gaolinfeng.chat.controller.TypedMessageResponse;
+import tech.gaolinfeng.chat.controller.ws.IChatMessageController;
 
 import javax.annotation.Resource;
 import javax.websocket.*;
@@ -38,10 +37,14 @@ public class ChatServerEndPoint {
     }
 
     @OnMessage
-    public TypedMessageResponse handleMessage(JsonNode root, Session session) throws IOException, EncodeException {
+    public void handleMessage(JsonNode root, Session session) throws IOException, EncodeException {
         logger.info("onMessage, message: " + root);
-        TypedMessageResponse response = chatMessageController.handleMessage(session, root);
-        return response;
+        chatMessageController.handleMessage(session, root);
+    }
+
+    @OnMessage
+    public void handlePongMessage(Session session, PongMessage pongMessage) {
+        sessionManager.onPongMessage(session, pongMessage);
     }
 
     @OnClose
