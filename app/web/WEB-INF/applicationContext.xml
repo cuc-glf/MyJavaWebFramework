@@ -45,12 +45,14 @@
     <bean id="myRealm" class="tech.gaolinfeng.base.config.shiro.MybatisRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <bean id="shiroSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"/>
+    <bean id="shiroSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRealm"/>
+        <property name="sessionManager" ref="shiroSessionManager"/>
     </bean>
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager"/>
+        <property name="securityManager" ref="shiroSecurityManager"/>
         <property name="loginUrl" value="/login"/>
         <property name="unauthorizedUrl" value="/unauthorized"/>
         <property name="filterChainDefinitions">
@@ -69,7 +71,7 @@
     <!-- enable shiro annotation -->
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
+        <property name="securityManager" ref="shiroSecurityManager"/>
     </bean>
     <bean id="secureNumberGenerator" class="org.apache.shiro.crypto.SecureRandomNumberGenerator"/>
 

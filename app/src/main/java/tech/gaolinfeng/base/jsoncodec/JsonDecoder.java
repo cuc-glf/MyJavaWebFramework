@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * Created by gaolf on 16/10/21.
+ * JSR 356 Websocket使用的接口, 用于将Java对象序列化为Json字符串
  */
 public class JsonDecoder implements Decoder.Text<JsonNode> {
 
