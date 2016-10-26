@@ -16,8 +16,12 @@ public class ClientMessageType {
      */
     public static final String PublicMessage = "PublicMessage";
     /**
+     * 公共聊天室历史消息
+     */
+    public static final String PublicMessageHistory = "PublicMessageHistory";
+
+    /**
      * 获取当前消息id
      */
     public static final String CurrentMessageId = "CurrentMessageId";
-
 }

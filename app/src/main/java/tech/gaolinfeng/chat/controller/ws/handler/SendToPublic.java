@@ -5,9 +5,9 @@ import org.apache.shiro.subject.Subject;
 import tech.gaolinfeng.base.entity.User;
 import tech.gaolinfeng.base.util.TextUtils;
 import tech.gaolinfeng.chat.annotation.MessageHandler;
-import tech.gaolinfeng.chat.controller.ws.ClientMessageType;
 import tech.gaolinfeng.chat.controller.ws.TypedMessageHandler;
 import tech.gaolinfeng.chat.controller.ws.TypedMessageResponse;
+import tech.gaolinfeng.chat.controller.ws.handler.response.SendToPublicResponse;
 import tech.gaolinfeng.chat.entity.PublicChatMessage;
 import tech.gaolinfeng.chat.service.IPublicChatMessageService;
 import tech.gaolinfeng.chat.ws.ISessionManager;
@@ -29,20 +29,6 @@ public class SendToPublic extends TypedMessageHandler {
 
     @Resource
     private IPublicChatMessageService publicChatMessageService;
-
-    private static class SendToPublicResponse extends TypedMessageResponse {
-        public String content;      // 发言内容
-        public Date time;           // 发言时间
-        public String senderName;   // 发言用户名
-
-        public SendToPublicResponse(String content, Date time, String senderName) {
-            super(ClientMessageType.PublicMessage);
-
-            this.content = content;
-            this.time = time;
-            this.senderName = senderName;
-        }
-    }
 
     @Override
     public TypedMessageResponse handleMessage(Session session, JsonNode root, Subject subject) {
