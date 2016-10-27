@@ -1,0 +1,18 @@
+<html>
+<head>
+    <script src="../lib/js/requirejs/require.js"></script>
+    <script>
+        requirejs(['./config'], function() {
+            requirejs(['app/main']);
+        });
+    </script>
+</head>
+
+<body>
+    <div ng-app="">
+        <p>name: <input type="text" ng-model="name"></p>
+        <p>Hello {{name}}</p>
+    </div>
+</body>
+
+</html>

@@ -1,7 +1,12 @@
 <html>
 <head>
     <title>require</title>
-    <script src="../lib/js/requirejs/require.js" data-main="js/app.js"></script>
+    <script src="../lib/js/requirejs/require.js"></script>
+    <script>
+        requirejs(['./config'], function(config) {
+            requirejs(['app/requireTest']);
+        });
+    </script>
 </head>
 <body>
 

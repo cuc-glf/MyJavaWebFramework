@@ -20,7 +20,8 @@
     "angular": "angularjs#^1.5.8",
     "bootstrap": "^3.3.7",
     "requirejs": "^2.3.2",
-    "domReady": "^2.0.1"
+    "domReady": "^2.0.1",
+    "angular-route": "^1.5.8"
   },
   "exportsOverride": {
     "bootstrap": {
