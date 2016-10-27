@@ -18,18 +18,26 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "angular": "angularjs#^1.5.8",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "requirejs": "^2.3.2",
+    "domReady": "^2.0.1"
   },
   "exportsOverride": {
     "bootstrap": {
-      "js": "dist/js/bootstrap.min.js",
-      "css": "dist/css/bootstrap.min.css"
-    },
-    "angular": {
-      "js": "angular.min.js"
+      "js": "dist/js/bootstrap.js",
+      "css": "dist/css/bootstrap.css"
     },
     "jquery": {
-      "js": "dist/jquery.min.js"
+      "js": "dist/jquery.js"
+    },
+    "angular": {
+      "js": "angular.js"
+    },
+    "requirejs": {
+      "js": "require.js"
+    },
+    "domReady": {
+      "js": "domReady.js"
     }
   }
 }
