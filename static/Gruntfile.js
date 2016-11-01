@@ -4,12 +4,16 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ['Gruntfile.js', 'app/src/**/*.js']
+            files: [
+                'Gruntfile.js',
+                'app/src/js/**/*.js',
+                '!app/src/js/jsx/**/*.js'
+            ]
         },
         "bower": {
             "install": {
                 "options": {
-                    "targetDir": "./app/lib",
+                    "targetDir": "./app/src/lib",
                     "layout": "byType",
                     "install": true,
                     "verbose": false,
@@ -17,27 +21,31 @@ module.exports = function(grunt) {
                 }
             }
         },
-        requirejs: {
-            compile: {
-                options: {
-                    baseUrl: './app',
-                    dir: './build',
-                    optimize: 'none',
-                    mainConfigFile: 'app/src/config.js',
-                    modules: [
-                        {
-                            name: 'app/app'
-                        }
-                    ]
-                }
+        babel: {
+            options: {
+                //sourceMap: true,
+                plugins: ['transform-react-jsx'], // npm install babel-plugin-transform-react-jsx
+                presets: ['es2015', 'react'] // npm install babel-preset-es2015 babel-preset-react
+            },
+            jsx: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'app/src',
+                        src: ['jsx/**/*.js'],
+                        dest: 'app/src/js',
+                        ext: '.js',
+                        extDot: 'first'
+                    }
+                ]
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-babel');
 
-    grunt.registerTask('default', ['jshint', 'requirejs']);
+    grunt.registerTask('default', ['babel', 'jshint']);
 
 };

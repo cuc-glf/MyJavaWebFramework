@@ -21,7 +21,8 @@
     "bootstrap": "^3.3.7",
     "requirejs": "^2.3.2",
     "domReady": "^2.0.1",
-    "angular-route": "^1.5.8"
+    "angular-route": "^1.5.8",
+    "react": "^15.3.2"
   },
   "exportsOverride": {
     "bootstrap": {
@@ -42,6 +43,9 @@
     },
     "domReady": {
       "js": "domReady.js"
+    },
+    "react": {
+      "js": ["react.js", "react-dom.js"]
     }
   }
 }

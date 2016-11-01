@@ -1,17 +1,17 @@
 <html>
 <head>
-    <script src="../lib/js/angular/angular.js"></script>
-    <script src="../lib/js/angular-route/angular-route.js"></script>
-    <script src="../lib/js/requirejs/require.js"></script>
-    <script>
-        requirejs(['./config'], function() {
-            requirejs(['app/main']);
-        });
-    </script>
+    <script src="./lib/js/react/react.js"></script>
+    <script src="./lib/js/react/react-dom.js"></script>
+    <link href="css/common.css" rel="stylesheet">
 </head>
 
 <body>
-    <div ng-view></div>
+    <div id="root"></div>
+
+    <a href="./login.html">login</a>
+    <a href="./register.html">register</a>
+
+    <script src="js/jsx/index/index.js"></script>
 </body>
 
 </html>

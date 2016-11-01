@@ -1,39 +1,21 @@
 <html>
 <head>
-    <script src="../lib/js/angular/angular.js"></script>
-    <script src="../lib/js/requirejs/require.js"></script>
-    <script>
-        requirejs(['./config'], function() {
-            requirejs(['app/main']);
-        });
-    </script>
+    <meta charset="utf-8">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>login</title>
+    <link href="css/common.css" rel="stylesheet">
+    <script src="./lib/js/jquery/jquery.js"></script>
+    <script src="./lib/js/react/react.js"></script>
+    <script src="./lib/js/react/react-dom.js"></script>
+
 </head>
 
 <body>
-<div>
+<div id="root"></div>
 
-    <div ng-controller="registerCtrl as $ctrl">
-
-        <form id="registerForm">
-            <label for="username">用户名: </label>
-            <input id="username" type="text" placeholder="用户名" ng-model="$ctrl.username">
-
-            <label for="phone">手机号: </label>
-            <input id="phone" type="number" placeholder="手机号" ng-model="$ctrl.phone">
-
-            <label for="password">密码: </label>
-            <input id="password" type="password" ng-model="$ctrl.password">
-
-            <input id="submit" type="submit" value="注册">
-        </form>
-
-        <p ng-click="$ctrl.onRegisterClick()">click me</p>
-
-        <p ng-bind="$ctrl.username"></p>
-
-    </div>
-
-</div>
+<script src="./js/jsx/common/loading.js"></script>
+<script src="./js/jsx/register/register.js"></script>
 </body>
 
 </html>

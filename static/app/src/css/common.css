@@ -1,0 +1,26 @@
+.button {
+    background: #ffffff;
+    padding: 5px 10px;
+    border:1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.button:hover {
+    background: #eeeeee;
+}
+.button:active {
+    background: #aaaaaa;
+}
+
+.commonForm {
+
+}
+
+.commonForm p {
+    width: 100%;
+}
+
+.commonForm label {
+    width: 100px;
+}
+
