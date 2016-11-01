@@ -11,18 +11,38 @@ class Chatroom extends React.Component {
             connectState: 'connecting',
             chatList: []
         };
+        this.initChatroom();
     }
 
     render() {
 
         let renderedContent = null;
-        if (this.state.connectionEstablished) {
+        if (this.state.connectState === 'disconnect') {
             renderedContent = (
-                <div></div>
+                <div>
+                    <span className="button" onClick={this.onReconnect}>重新链接</span>
+                </div>
             );
-        } else {
+        } else if (this.state.connectState === 'connecting') {
             renderedContent = (
-                <div></div>
+                <div>
+                    <Loading/>
+                </div>
+            );
+        } else if (this.state.connectState ==='connected') {
+            renderedContent = (
+                <div>
+                    <p>当前用户: {this.state.userinfo.name}</p>
+                    <div>
+                        {this.state.chatList.map((item) => {
+                            return <p>{item.senderName}({item.time}): {item.content}</p>
+                        })}
+                    </div>
+                    <div>
+                        <input type="text" onChange={this.onSpeechChange}/>
+                        <p className="button" onClick={this.onSendClick}>发送</p>
+                    </div>
+                </div>
             );
         }
 
@@ -70,5 +90,17 @@ class Chatroom extends React.Component {
                 }
             }
         });
+    }
+
+    onReconnect(event) {
+
+    }
+
+    onSpeechChange(event) {
+
+    }
+
+    onSendClick(event) {
+
     }
 }
