@@ -16,7 +16,9 @@ var Login = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            inFlight: false
+        };
         _this.onLoginClick = _this.onLoginClick.bind(_this);
         _this.onPasswordChange = _this.onPasswordChange.bind(_this);
         _this.onUsernameChange = _this.onUsernameChange.bind(_this);
@@ -28,7 +30,7 @@ var Login = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 "div",
-                { className: "mainContainer" },
+                { className: "main-container" },
                 React.createElement(
                     "form",
                     { className: "commonForm" },

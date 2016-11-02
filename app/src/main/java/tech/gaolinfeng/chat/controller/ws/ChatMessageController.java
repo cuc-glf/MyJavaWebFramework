@@ -89,7 +89,7 @@ public class ChatMessageController implements IChatMessageController {
                 }
             }
         }
-        TypedMessageResponse response = handleMessage(session, root, subject, type);
+        TypedMessageResponse response = handleMessageTransactional(session, root, subject, type, -1);
         if (response != null) {
             sendObject(session, response);
         }
@@ -123,15 +123,35 @@ public class ChatMessageController implements IChatMessageController {
 
     }
 
+    /**
+     *
+     * @param session message发送方的session
+     * @param root 消息的json root
+     * @param subject Shiro subject, 用户信息
+     * @param type 消息的类型, 根据消息类型决定消息的处理handler
+     * @param messageId 消息的id, 如果不需要就传-1
+     * @return 返回给消息发送者的消息
+     * @throws IOException
+     * @throws EncodeException
+     */
     @Transactional
     private TypedMessageResponse handleMessageTransactional(Session session, JsonNode root, Subject subject, String type, int messageId) throws IOException, EncodeException {
-        clientMessageIdService.addId(messageId, ((User) subject.getPrincipal()).getId());
-        return handleMessage(session, root, subject, type);
-    }
-
-    private TypedMessageResponse handleMessage(Session session, JsonNode root, Subject subject, String type) {
         if (handlerMap.containsKey(type)) {
-            return handlerMap.get(type).handleMessage(session, root, subject);
+            TypedMessageHandler handler = (TypedMessageHandler) handlerMap.get(type);
+            if (messageId >= 0) {
+                if (handler.isRequireMessageId()) {     // 需要id, 并且客户端提供了id
+                    clientMessageIdService.addId(messageId, ((User) subject.getPrincipal()).getId());
+                } else {                                // 不需要id, 但是客户端提供了id
+                    throw new RuntimeException("message id is not required by message type: " + type);
+                }
+            } else {
+                if (handler.isRequireMessageId()) {     // 需要id, 但是客户端没有提供id
+                    throw new RuntimeException("message id is required by message type: " + type);
+                } else {
+                    // 不需要id, 而客户端也没有提供id
+                }
+            }
+            return handler.handleMessage(session, root, subject);
         } else {
             throw new RuntimeException("message type not exist: " + type);
         }

@@ -47,6 +47,6 @@ public class ClientMessageIdService implements IClientMessageIdService {
         if (clientMessageId == null) {
             return 1;
         }
-        return clientMessageId.getUserId();
+        return clientMessageId.getId();
     }
 }

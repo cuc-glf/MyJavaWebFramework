@@ -14,4 +14,8 @@ public abstract class TypedMessageHandler implements IMessageHandler {
     public void setMessageType(String messageType) {
         this.messageType = messageType;
     }
+
+    public boolean isRequireMessageId() {
+        return false;
+    }
 }

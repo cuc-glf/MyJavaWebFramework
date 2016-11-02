@@ -18,7 +18,7 @@ var Loading = function (_React$Component) {
 
         _this.state = {
             dots: ".",
-            show: props.show
+            show: typeof props.show === 'undefined' ? true : props.show
         };
         return _this;
     }

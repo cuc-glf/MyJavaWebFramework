@@ -3,7 +3,7 @@ class Loading extends React.Component {
         super(props);
         this.state = {
             dots: ".",
-            show: props.show
+            show: typeof props.show === 'undefined' ? true : props.show
         }
     }
 

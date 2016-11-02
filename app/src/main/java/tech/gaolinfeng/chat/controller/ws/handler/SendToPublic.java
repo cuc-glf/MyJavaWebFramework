@@ -11,7 +11,6 @@ import tech.gaolinfeng.chat.controller.ws.handler.response.SendToPublicResponse;
 import tech.gaolinfeng.chat.entity.PublicChatMessage;
 import tech.gaolinfeng.chat.service.IPublicChatMessageService;
 import tech.gaolinfeng.chat.ws.ISessionManager;
-import tech.gaolinfeng.chat.ws.MatchAllSessionFilter;
 
 import javax.annotation.Resource;
 import javax.websocket.Session;
@@ -20,6 +19,11 @@ import java.util.Date;
 /**
  * Created by gaolf on 16/10/22.
  * 公共聊天室发言
+ *
+ * message: {
+ *     messageType,
+ *     content,     // 消息内容
+ * }
  */
 @MessageHandler("sendToPublic")
 public class SendToPublic extends TypedMessageHandler {
@@ -31,15 +35,20 @@ public class SendToPublic extends TypedMessageHandler {
     private IPublicChatMessageService publicChatMessageService;
 
     @Override
+    public boolean isRequireMessageId() {
+        return true;
+    }
+
+    @Override
     public TypedMessageResponse handleMessage(Session session, JsonNode root, Subject subject) {
         User user = (User) subject.getPrincipal();
         String message = root.get("content").asText();
         if (TextUtils.isEmpty(message)) {
             return null;
         }
-        publicChatMessageService.addMessage(new PublicChatMessage(user.getId(), new Date(), message));
-        sessionManager.send(new SendToPublicResponse(message, new Date(), user.getName()),
-                new MatchAllSessionFilter());
+        PublicChatMessage saveMessage = new PublicChatMessage(user.getId(), new Date(), message);
+        publicChatMessageService.addMessage(saveMessage);
+        sessionManager.send(new SendToPublicResponse(message, new Date(), user.getName()), s -> session != s);
         return null;
     }
 }

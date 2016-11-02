@@ -29,7 +29,7 @@ var IndexApp = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 "div",
-                { className: "mainContainer" },
+                { className: "main-container" },
                 React.createElement(
                     "h1",
                     null,

@@ -1,7 +1,9 @@
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            inFlight: false
+        };
         this.onLoginClick = this.onLoginClick.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);

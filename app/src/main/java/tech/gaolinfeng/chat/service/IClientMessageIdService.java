@@ -18,5 +18,11 @@ public interface IClientMessageIdService {
      * 如果Service调用失败, 回滚Service相关操作的同时, 也应该将该id纪录回滚, 避免纪录了id但是实际上并没有处理对应的消息
      */
     void addId(int id, int userId);
+
+    /**
+     * 获取当前最大的消息id, 下次客户端发送的消息应该至少是这个id+1
+     * @param userId 要发送消息的用户id
+     * @return 当前最大的消息id
+     */
     int getCurrentMessageId(int userId);
 }

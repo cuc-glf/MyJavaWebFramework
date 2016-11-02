@@ -15,6 +15,10 @@ import javax.websocket.Session;
 /**
  * Created by gaolf on 16/10/24.
  * 获取当前消息id, 为了支持重传和避免重复处理消息, 客户端在发送需要重传且非冥等的请求时需要确保每个消息的id的唯一性.
+ *
+ * message: {
+ *     messageType
+ * }
  */
 @MessageHandler("getCurrentMessageId")
 public class GetCurrentMessageId extends TypedMessageHandler {
